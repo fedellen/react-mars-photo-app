@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import { keyGen } from './utils/keyGen';
 
 const marsApi = `https://api.nasa.gov/mars-photos/api/v1/rovers/Perseverance/latest_photos?api_key=DEMO_KEY`;
 
@@ -46,12 +47,6 @@ function App() {
   const displayUrls: string[] = marsData
     ? marsData.latest_photos.slice(0, 20).map((data) => data.img_src)
     : [];
-
-  let key = 0;
-  const keyGen = () => {
-    key++;
-    return key;
-  };
 
   return (
     <div className='App'>

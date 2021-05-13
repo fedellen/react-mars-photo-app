@@ -1,3 +1,11 @@
+html {
+  background-color: #4b1b05;
+}
+
+h1 {
+  color: #d6764a;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
