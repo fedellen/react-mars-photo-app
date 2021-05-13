@@ -1,6 +1,12 @@
+/* Theme variables */
+:root {
+  --bg: #3a1004;
+  --text: #db6744;
+}
+
 html {
-  background-color: #4b1b05;
-  color: #d6764a;
+  background-color: var(--bg);
+  color: var(--text);
 }
 
 body {
