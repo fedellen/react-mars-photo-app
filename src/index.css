@@ -1,6 +1,13 @@
 /* Theme variables */
 :root {
+  /* Media breakpoints */
+  --sm: 540px;
+  --md: 840px;
+  --lg: 1020px;
+
+  /* Base color scheme */
   --bg: #3a1004;
+  --medium: #581d0b;
   --text: #db6744;
 }
 
