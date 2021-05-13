@@ -1,29 +1,15 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import SortButton from './components/SortButton';
+import { marsObject, perseveranceCameras } from './types';
 import { keyGen } from './utils/keyGen';
 
 const marsApi = `https://api.nasa.gov/mars-photos/api/v1/rovers/Perseverance/latest_photos?api_key=DEMO_KEY`;
 
-type marsObject = {
-  latest_photos: [
-    {
-      id: number;
-      sol: number;
-      img_src: string;
-      earth_date: string;
-      rover: {
-        id: number;
-        landing_date: string;
-        launch_date: string;
-        name: string;
-        status: string;
-      };
-    }
-  ];
-};
-
 function App() {
   const [marsData, setMarsData] = useState<marsObject | null>(null);
+  const [currentCamera, setCurrentCamera] =
+    useState<perseveranceCameras | 'all'>('all');
 
   async function fetchData() {
     try {
@@ -34,24 +20,53 @@ function App() {
     }
   }
 
-  console.log(marsData);
+  function toggleCamera(camera: perseveranceCameras | 'all') {
+    setCurrentCamera(camera);
+  }
 
+  console.log(marsData);
+  console.log(currentCamera);
   useEffect(() => {
     fetchData();
   }, []);
 
-  // const trimmedData = marsData?.photos.slice(0, 20);
+  const cameraSorted = marsData?.latest_photos.filter(
+    (obj) => obj.camera.name === currentCamera
+  );
 
-  // console.log(trimmedData);
-
-  const displayUrls: string[] = marsData
-    ? marsData.latest_photos.slice(0, 20).map((data) => data.img_src)
+  const displayedImageUri: string[] = marsData
+    ? currentCamera === 'all'
+      ? marsData.latest_photos.map((data) => data.img_src)
+      : cameraSorted
+      ? cameraSorted.map((data) => data.img_src)
+      : []
     : [];
 
   return (
     <div className='App'>
-      <h1>Latest photos from Mars</h1>
-      {displayUrls.map((url) => (
+      <h1 style={{ fontSize: '4em', marginLeft: '2em' }}>
+        Latest photos from Mars 🚀
+      </h1>
+      <div>
+        <h3>Sort by Camera</h3>
+        <ul
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            listStyle: 'none',
+            // alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <SortButton camera='MCZ_LEFT' setCamera={toggleCamera} />
+          <SortButton camera='MCZ_RIGHT' setCamera={toggleCamera} />
+          <SortButton camera='NAVCAM_LEFT' setCamera={toggleCamera} />
+          <SortButton camera='NAVCAM_RIGHT' setCamera={toggleCamera} />
+          <SortButton camera='SUPERCAM_RMI' setCamera={toggleCamera} />
+          <SortButton camera='all' setCamera={toggleCamera} />
+        </ul>
+      </div>
+      {displayedImageUri.map((url) => (
         <img className='photo' src={url} key={keyGen()} alt='Mars photos' />
       ))}
     </div>
