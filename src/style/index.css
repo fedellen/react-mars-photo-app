@@ -1,10 +1,5 @@
 /* Theme variables */
 :root {
-  /* Media breakpoints */
-  --sm: 540px;
-  --md: 840px;
-  --lg: 1020px;
-
   /* Base color scheme */
   --bg: #3a1004;
   --medium: #581d0b;
@@ -13,27 +8,29 @@
   /* Mobile font sizes  */
   --base: 1em;
   --subHead: 1.5em;
-  --head: 2em;
-  --title: 4em;
+  --head: 1em;
+  --title: 2em;
 }
 
-@media screen and (max-width: 540px) {
+/* Tablet variables */
+@media screen and (min-width: 620px) {
   :root {
     /* Font sizes  */
     --base: 1em;
     --subHead: 1.5em;
     --head: 2em;
-    --title: 4em;
+    --title: 2.75em;
   }
 }
 
-@media screen and (max-width: 900px) {
+/* Desktop variables */
+@media screen and (min-width: 900px) {
   :root {
-    /* Desktop sizes  */
+    /* Font sizes  */
     --base: 1em;
     --subHead: 1.5em;
-    --head: 2em;
-    --title: 4em;
+    --head: 3em;
+    --title: 3.75em;
   }
 }
 
@@ -41,6 +38,16 @@ html {
   background-color: var(--bg);
   color: var(--text);
   font-size: var(--base);
+}
+
+h1 {
+  font-size: var(--title);
+  /* margin-left: 1em; */
+}
+
+ul {
+  list-style: none;
+  padding-inline-start: 0;
 }
 
 body {

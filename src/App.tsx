@@ -44,9 +44,7 @@ function App() {
 
   return (
     <div className='App'>
-      <h1 style={{ fontSize: '4em', marginLeft: '2em' }}>
-        Latest photos from Mars 🚀
-      </h1>
+      <h1>Latest photos from Mars 🚀</h1>
       <div className='sortByCamera'>
         <h3>Sort by Camera</h3>
         <ul>
