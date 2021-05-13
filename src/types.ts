@@ -16,27 +16,31 @@ export type perseveranceCameras =
   | 'SHERLOC_WATSON'
   | 'SUPERCAM_RMI';
 
-/** Type for /Perseverance/latest_photos endpoint */
+/** Types for mars rover  /Perseverance/ endpoint */
 export type marsObject = {
-  latest_photos: [
-    {
-      id: number;
-      sol: number;
-      img_src: string;
-      earth_date: string;
-      rover: {
-        id: number;
-        landing_date: string;
-        launch_date: string;
-        name: string;
-        status: string;
-      };
-      camera: {
-        full_name: string;
-        id: number;
-        rover_id: number;
-        name: perseveranceCameras;
-      };
-    }
-  ];
+  latest_photos: marsPhoto[];
+};
+
+export type marsPhoto = {
+  id: number;
+  sol: number;
+  img_src: string;
+  earth_date: string;
+  rover: marsRover;
+  camera: roverCamera;
+};
+
+type marsRover = {
+  id: number;
+  landing_date: string;
+  launch_date: string;
+  name: string;
+  status: string;
+};
+
+type roverCamera = {
+  full_name: string;
+  id: number;
+  rover_id: number;
+  name: perseveranceCameras;
 };
