@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
+import './style/App.css';
 import SortButton from './components/SortButton';
 import { marsObject, perseveranceCameras } from './types';
 import { keyGen } from './utils/keyGen';
