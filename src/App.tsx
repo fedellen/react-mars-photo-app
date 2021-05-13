@@ -47,17 +47,9 @@ function App() {
       <h1 style={{ fontSize: '4em', marginLeft: '2em' }}>
         Latest photos from Mars 🚀
       </h1>
-      <div>
+      <div className='sortByCamera'>
         <h3>Sort by Camera</h3>
-        <ul
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            listStyle: 'none',
-            // alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        >
+        <ul>
           <SortButton camera='MCZ_LEFT' setCamera={toggleCamera} />
           <SortButton camera='MCZ_RIGHT' setCamera={toggleCamera} />
           <SortButton camera='NAVCAM_LEFT' setCamera={toggleCamera} />

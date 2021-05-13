@@ -1,10 +1,51 @@
 .App {
   text-align: center;
-  flex: auto;
+  display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .photo {
   padding: 3em;
   width: 400px;
+}
+
+.sortByCamera {
+  background-color: var(--medium);
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* color: var(--bg); */
+  font-size: 2em;
+}
+
+.sortByCamera ul {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.sortByCamera ul li {
+  padding: 0.4em;
+}
+
+@media (max-width: var(--sm)) {
+  .sortByCamera ul {
+    background-color: aqua;
+  }
+}
+
+.sortByCamera ul li button {
+  border-radius: 999em;
+  border: none;
+  padding: 0.6em;
+  font-size: 0.75em;
+  font-weight: 600;
+  background-color: var(--text);
+  color: var(--bg);
+  box-shadow: 2px 2px 3px black;
 }
