@@ -1,10 +1,10 @@
 # Mars Perseverance Rover Photos
 
-This is a quick practice project I'm working on to sharpen my React workflow. At the moment, the application simply renders out the latest photos from the Mars Perseverance rover. The user can then sort the photos by camera name.
+This is a quick practice project I'm working on to sharpen my React workflow. The application simply renders out the latest photos from the Mars Perseverance rover. The user can then sort the photos by camera name.
 
 ---
 
-# Getting Started with Create React App
+### Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
