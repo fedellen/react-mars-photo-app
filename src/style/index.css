@@ -9,11 +9,38 @@
   --bg: #3a1004;
   --medium: #581d0b;
   --text: #db6744;
+
+  /* Mobile font sizes  */
+  --base: 1em;
+  --subHead: 1.5em;
+  --head: 2em;
+  --title: 4em;
+}
+
+@media screen and (max-width: 540px) {
+  :root {
+    /* Font sizes  */
+    --base: 1em;
+    --subHead: 1.5em;
+    --head: 2em;
+    --title: 4em;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  :root {
+    /* Desktop sizes  */
+    --base: 1em;
+    --subHead: 1.5em;
+    --head: 2em;
+    --title: 4em;
+  }
 }
 
 html {
   background-color: var(--bg);
   color: var(--text);
+  font-size: var(--base);
 }
 
 body {
