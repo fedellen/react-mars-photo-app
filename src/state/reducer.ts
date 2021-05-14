@@ -1,8 +1,8 @@
-import { marsObject, marsPhoto } from '../types';
+import { marsPhoto } from '../types';
 import { State } from './state';
 
 export type Action =
-  | { type: 'setData'; payload: marsObject }
+  | { type: 'setData'; payload: marsPhoto[] }
   | { type: 'selectPhoto'; payload: marsPhoto }
   | { type: 'clearPhoto'; payload: marsPhoto }
   | { type: 'changeQuery'; payload: string }; // Todo: Define query types

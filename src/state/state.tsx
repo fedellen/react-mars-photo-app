@@ -1,5 +1,5 @@
 import { createContext, Dispatch, useContext, useReducer } from 'react';
-import { marsObject, marsPhoto } from '../types';
+import { marsPhoto } from '../types';
 import { Action } from './reducer';
 
 /** Define your state object types */
@@ -7,7 +7,7 @@ export type State = {
   /** Current query to API */
   apiQuery: string;
   /** Current data from API */
-  apiData: marsObject | null;
+  apiData: marsPhoto[] | null;
   /** User clicked photo  */
   selectedPhoto: marsPhoto | null;
 };
