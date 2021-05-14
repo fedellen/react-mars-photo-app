@@ -1,20 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './style/App.css';
 import SortButton from './components/SortButton';
-import { marsObject, perseveranceCameras } from './types';
-import { keyGen } from './utils/keyGen';
+import {
+  latestObject,
+  perseveranceCameras,
+  solObject,
+  roverNames,
+  marsPhoto
+} from './types';
+import DisplayPhotoGroup from './components/DisplayPhotoGroup';
 
-const marsApi = `https://api.nasa.gov/mars-photos/api/v1/rovers/Perseverance/latest_photos?api_key=DEMO_KEY`;
+// const marsApi = `https://api.nasa.gov/mars-photos/api/v1/rovers/Perseverance/latest_photos?api_key=DEMO_KEY`;
+let marsApi = `https://mars-photos.herokuapp.com/api/v1/rovers/Perseverance/latest_photos`;
 
 function App() {
-  const [marsData, setMarsData] = useState<marsObject | null>(null);
+  const [marsData, setMarsData] = useState<marsPhoto[] | null>(null);
+
+  /** Current camera to display */
   const [currentCamera, setCurrentCamera] =
     useState<perseveranceCameras | 'all'>('all');
+  /** Current sol, -1 is latest_photos endpoint */
+  const [sol, setSol] = useState(-1);
+  /** Current rover to display */
+  const [rover, setRover] = useState<roverNames>('Perseverance');
 
   async function fetchData() {
     try {
-      const response: marsObject = await (await fetch(marsApi)).json();
-      setMarsData(response);
+      const currentQuery = `https://mars-photos.herokuapp.com/api/v1/rovers/${rover}/${
+        sol === -1 ? 'latest_photos' : 'photos'
+      }${sol === -1 ? '' : `?sol=${sol}`}`;
+      if (sol === -1) {
+        const response: latestObject = await (await fetch(currentQuery)).json();
+        setMarsData(response.latest_photos);
+      } else {
+        const response: solObject = await (await fetch(currentQuery)).json();
+        setMarsData(response.photos);
+      }
     } catch (err) {
       console.error('Failed to fetch Mars API ', err);
     }
@@ -30,17 +51,10 @@ function App() {
     fetchData();
   }, []);
 
-  const cameraSorted = marsData?.latest_photos.filter(
-    (obj) => obj.camera.name === currentCamera
-  );
-
-  const displayedImageUri: string[] = marsData
-    ? currentCamera === 'all'
-      ? marsData.latest_photos.map((data) => data.img_src)
-      : cameraSorted
-      ? cameraSorted.map((data) => data.img_src)
-      : []
-    : [];
+  const displayGroup =
+    currentCamera === 'all'
+      ? marsData
+      : marsData?.filter((obj) => obj.camera.name === currentCamera);
 
   return (
     <div className='App'>
@@ -56,9 +70,7 @@ function App() {
           <SortButton camera='all' setCamera={toggleCamera} />
         </ul>
       </div>
-      {displayedImageUri.map((url) => (
-        <img className='photo' src={url} key={keyGen()} alt='Mars photos' />
-      ))}
+      {displayGroup && <DisplayPhotoGroup photoGroup={displayGroup} />}
     </div>
   );
 }
