@@ -1,11 +1,11 @@
 import { createContext, Dispatch, useContext, useReducer } from "react";
-import { marsPhoto } from "../types";
+import { marsPhoto, roverNames } from "../types";
 import { Action } from "./reducer";
 
 /** Define your state object types */
 export type State = {
-  /** Current query to API */
-  apiQuery: string;
+  /** Current query to API, -1 sol is `latest_photos` */
+  apiQuery: { rover: roverNames; sol: number };
   /** Current data from API */
   apiData: marsPhoto[] | null;
   /** User clicked photo  */
@@ -14,7 +14,7 @@ export type State = {
 
 /** Define your initial state */
 const initialState: State = {
-  apiQuery: "https://api.nasa.gov/mars-photos/api/v1/rovers/Perseverance/",
+  apiQuery: { rover: "Perseverance", sol: -1 },
   apiData: null,
   selectedPhoto: null,
 };
