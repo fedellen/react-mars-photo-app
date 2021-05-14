@@ -1,30 +1,30 @@
-import { marsPhoto } from '../types';
-import { State } from './state';
+import { marsPhoto } from "../types";
+import { State } from "./state";
 
 export type Action =
-  | { type: 'setData'; payload: marsPhoto[] }
-  | { type: 'selectPhoto'; payload: marsPhoto }
-  | { type: 'clearPhoto'; payload: marsPhoto }
-  | { type: 'changeQuery'; payload: string }; // Todo: Define query types
+  | { type: "setData"; payload: marsPhoto[] }
+  | { type: "selectPhoto"; payload: marsPhoto }
+  | { type: "clearPhoto"; payload: marsPhoto }
+  | { type: "changeQuery"; payload: string }; // Todo: Define query types
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case 'setData':
+    case "setData":
       return {
         ...state,
-        apiData: action.payload
+        apiData: action.payload,
       };
 
-    case 'selectPhoto':
+    case "selectPhoto":
       return {
         ...state,
-        selectedPhoto: action.payload
+        selectedPhoto: action.payload,
       };
 
-    case 'clearPhoto':
+    case "clearPhoto":
       return {
         ...state,
-        selectedPhoto: null
+        selectedPhoto: null,
       };
 
     default:

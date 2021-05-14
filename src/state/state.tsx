@@ -1,6 +1,6 @@
-import { createContext, Dispatch, useContext, useReducer } from 'react';
-import { marsPhoto } from '../types';
-import { Action } from './reducer';
+import { createContext, Dispatch, useContext, useReducer } from "react";
+import { marsPhoto } from "../types";
+import { Action } from "./reducer";
 
 /** Define your state object types */
 export type State = {
@@ -14,15 +14,15 @@ export type State = {
 
 /** Define your initial state */
 const initialState: State = {
-  apiQuery: 'https://api.nasa.gov/mars-photos/api/v1/rovers/Perseverance/',
+  apiQuery: "https://api.nasa.gov/mars-photos/api/v1/rovers/Perseverance/",
   apiData: null,
-  selectedPhoto: null
+  selectedPhoto: null,
 };
 
 /** Create a context with initial state, and a dispatch function */
 const StateContext = createContext<[State, Dispatch<Action>]>([
   initialState,
-  () => initialState
+  () => initialState,
 ]);
 
 /**
@@ -40,7 +40,7 @@ type StateProviderProps = {
 /** Create provider to wrap app in */
 export default function StateProvider({
   reducer,
-  children
+  children,
 }: StateProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (

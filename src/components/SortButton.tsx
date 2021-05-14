@@ -1,8 +1,8 @@
-import { perseveranceCameras } from '../types';
+import { perseveranceCameras } from "../types";
 
 type SortButtonProps = {
-  camera: perseveranceCameras | 'all';
-  setCamera: (camera: perseveranceCameras | 'all') => void;
+  camera: perseveranceCameras | "all";
+  setCamera: (camera: perseveranceCameras | "all") => void;
 };
 
 export default function SortButton({ camera, setCamera }: SortButtonProps) {
