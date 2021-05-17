@@ -1,11 +1,17 @@
-/* Theme variables */
+/* Mobile theme variables */
 :root {
   /* Base color scheme */
+  --dark: #1d0b06;
   --bg: #3a1004;
   --medium: #581d0b;
   --text: #db6744;
 
-  /* Mobile font sizes  */
+  --boxShadow: 2px 2px 3px var(--dark);
+
+  /* Gallery size */
+  --imageWidth: 100%;
+
+  /*  font sizes  */
   --base: 1em;
   --subHead: 1.5em;
   --head: 1em;
@@ -20,6 +26,9 @@
     --subHead: 1.5em;
     --head: 2em;
     --title: 2.75em;
+
+    /* Gallery size */
+    --imageWidth: 31%;
   }
 }
 
@@ -31,6 +40,9 @@
     --subHead: 1.5em;
     --head: 3em;
     --title: 3.75em;
+
+    /* Gallery size */
+    --imageWidth: 32%;
   }
 }
 

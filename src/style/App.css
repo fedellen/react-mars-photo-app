@@ -5,13 +5,45 @@
 
   /* justify-content: center; */
   align-items: center;
-  margin: 0 1rem 0 1rem;
+  margin: 0 0.5rem 0 0.5rem;
 }
 
-.photo {
+.photoGroup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1em 0;
+  /* align-items: center; */
+  width: 100%;
+}
+
+.photoGroup div {
+  width: var(--imageWidth);
+
+  display: flex;
+  flex-direction: column;
+  padding: 0.3rem;
+  border-radius: 1rem;
+}
+
+.photoGroup img {
+  /* max-width: var(--imageWidth); */
+  border-radius: 1rem;
+}
+
+.photoGroup div.active {
+  width: 100%;
+}
+
+/* .photoGroup div.active.zoom {
+  width: 300%;
+  position: sticky;
+} */
+
+/* .photo {
   padding: 3em;
   width: 400px;
-}
+} */
 
 .sortByCamera {
   background-color: var(--medium);
@@ -46,5 +78,5 @@
   font-weight: 600;
   background-color: var(--text);
   color: var(--bg);
-  box-shadow: 2px 2px 3px black;
+  box-shadow: var(--boxShadow);
 }
