@@ -2,10 +2,12 @@ import { createContext, Dispatch, useContext, useReducer } from "react";
 import { marsPhoto, roverNames } from "../types";
 import { Action } from "./reducer";
 
+export type apiQuery = { rover: roverNames; sol: number };
+
 /** Define your state object types */
 export type State = {
   /** Current query to API, -1 sol is `latest_photos` */
-  apiQuery: { rover: roverNames; sol: number };
+  apiQuery: apiQuery;
   /** Current data from API */
   apiData: marsPhoto[] | null;
   /** User clicked photo  */
