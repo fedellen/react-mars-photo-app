@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./style/App.css";
-import SortButton from "./components/SortButton";
+import SortCamera from "./components/SortCamera";
 import {
   latestObject,
   perseveranceCameras,
@@ -11,6 +11,7 @@ import {
 import DisplayPhotoGroup from "./components/DisplayPhotoGroup";
 import { useStateValue } from "./state/state";
 import useMarsQuery from "./hooks/useMarsQuery";
+import SortRover from "./components/SortRover";
 
 function App() {
   const [{ apiData }] = useStateValue();
@@ -37,15 +38,16 @@ function App() {
   return (
     <div className="App">
       <h1>Latest photos from Mars 🚀</h1>
+      <SortRover />
       <div className="sortByCamera">
         <h3>Sort by Camera</h3>
         <ul>
-          <SortButton camera="MCZ_LEFT" setCamera={toggleCamera} />
-          <SortButton camera="MCZ_RIGHT" setCamera={toggleCamera} />
-          <SortButton camera="NAVCAM_LEFT" setCamera={toggleCamera} />
-          <SortButton camera="NAVCAM_RIGHT" setCamera={toggleCamera} />
-          <SortButton camera="SUPERCAM_RMI" setCamera={toggleCamera} />
-          <SortButton camera="all" setCamera={toggleCamera} />
+          <SortCamera camera="MCZ_LEFT" setCamera={toggleCamera} />
+          <SortCamera camera="MCZ_RIGHT" setCamera={toggleCamera} />
+          <SortCamera camera="NAVCAM_LEFT" setCamera={toggleCamera} />
+          <SortCamera camera="NAVCAM_RIGHT" setCamera={toggleCamera} />
+          <SortCamera camera="SUPERCAM_RMI" setCamera={toggleCamera} />
+          <SortCamera camera="all" setCamera={toggleCamera} />
         </ul>
       </div>
       {displayGroup && <DisplayPhotoGroup photoGroup={displayGroup} />}
