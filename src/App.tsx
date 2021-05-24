@@ -12,6 +12,7 @@ import DisplayPhotoGroup from "./components/DisplayPhotoGroup";
 import { useStateValue } from "./state/state";
 import useMarsQuery from "./hooks/useMarsQuery";
 import SortRover from "./components/SortRover";
+import Footer from "./components/Footer";
 
 function App() {
   const [{ apiData }] = useStateValue();
@@ -51,6 +52,7 @@ function App() {
         </ul>
       </div>
       {displayGroup && <DisplayPhotoGroup photoGroup={displayGroup} />}
+      <Footer />
     </div>
   );
 }
