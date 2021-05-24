@@ -1,6 +1,7 @@
 import { useStateValue } from "../state/state";
 import { roverNames } from "../types";
 import { keyGen } from "../utils/keyGen";
+import Button from "./shared/Button";
 
 type RoverButtonProps = {
   rover: roverNames;
@@ -9,12 +10,12 @@ type RoverButtonProps = {
 
 function RoverButton({ rover, setRover }: RoverButtonProps) {
   return (
-    <button
+    <Button
       onClick={() => setRover}
       aria-label={`Show latest photos from the Mars ${rover} Rover`}
     >
       {rover}
-    </button>
+    </Button>
   );
 }
 

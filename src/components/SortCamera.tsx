@@ -1,4 +1,5 @@
 import { perseveranceCameras } from "../types";
+import Button from "./shared/Button";
 
 type SortCameraProps = {
   camera: perseveranceCameras | "all";
@@ -8,12 +9,12 @@ type SortCameraProps = {
 export default function SortCamera({ camera, setCamera }: SortCameraProps) {
   return (
     <li>
-      <button
+      <Button
         onClick={() => setCamera(camera)}
         aria-label={`Show latest photos from ${camera}`}
       >
         {camera}
-      </button>
+      </Button>
     </li>
   );
 }
