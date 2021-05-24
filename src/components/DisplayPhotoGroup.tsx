@@ -6,12 +6,10 @@ import { keyGen } from "../utils/keyGen";
 type PhotoProps = {
   photo: marsPhoto;
   currentlySelected: boolean;
-  selectPhoto: () => void;
+  selectPhoto: (photo: marsPhoto) => void;
 };
 
 function Photo({ photo, currentlySelected, selectPhoto }: PhotoProps) {
-  const [zoom, setZoom] = useState(false);
-
   return (
     <div>
       <img
@@ -20,19 +18,22 @@ function Photo({ photo, currentlySelected, selectPhoto }: PhotoProps) {
         key={keyGen()}
         alt="Photograph from a Mars rover"
         loading="lazy"
-        onClick={() => (currentlySelected ? setZoom(!zoom) : selectPhoto())}
+        onClick={() => selectPhoto(photo)}
       />
       {currentlySelected && (
-        <div className="mt-3 text-xl translate-y-[-4.2rem] transform flex justify-between">
+        <div className="mt-3 text-2xl translate-y-[-4.1rem] transform flex justify-between font-semibold ">
           <PhotoInfo className="rounded-l-none">
             <span>From the {photo.rover.name} Rover</span>
-            <a className="underline hover:text-red-600" href={photo.img_src}>
+            <a
+              className="underline hover:text-red-600 text-base"
+              href={photo.img_src}
+            >
               Link to Raw Image
             </a>
           </PhotoInfo>
           <PhotoInfo className="rounded-r-none">
-            <span>Mars Sol (Days on Mars): {photo.sol}</span>
-            <span>Earth Date: {photo.earth_date}</span>
+            <span>Mars Sol: {photo.sol}</span>
+            <span className="text-base">Earth Date: {photo.earth_date}</span>
           </PhotoInfo>
         </div>
       )}
@@ -45,7 +46,7 @@ type PhotoInfoProps = { children?: ReactNode; className?: string };
 function PhotoInfo({ children, className }: PhotoInfoProps) {
   return (
     <div
-      className={`flex flex-col bg-bg bg-opacity-70 px-4 rounded-xl rounded-b-none ${className}`}
+      className={`flex flex-col bg-bg bg-opacity-80 px-4 rounded-xl rounded-b-none ${className}`}
     >
       {children}
     </div>
@@ -60,6 +61,7 @@ export default function DisplayPhotoGroup({
   photoGroup,
 }: DisplayPhotoGroupProps) {
   const [{ selectedPhoto }, dispatch] = useStateValue();
+
   return (
     <section className="flex flex-wrap">
       {" "}
