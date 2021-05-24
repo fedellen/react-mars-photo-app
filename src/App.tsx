@@ -1,13 +1,6 @@
-import { useEffect, useState } from "react";
-import "./style/App.css";
+import { useState } from "react";
 import SortCamera from "./components/SortCamera";
-import {
-  latestObject,
-  perseveranceCameras,
-  solObject,
-  roverNames,
-  marsPhoto,
-} from "./types";
+import { perseveranceCameras } from "./types";
 import DisplayPhotoGroup from "./components/DisplayPhotoGroup";
 import { useStateValue } from "./state/state";
 import useMarsQuery from "./hooks/useMarsQuery";
@@ -37,8 +30,8 @@ function App() {
       : apiData?.filter((obj) => obj.camera.name === currentCamera);
 
   return (
-    <div className="App">
-      <h1>Latest photos from Mars 🚀</h1>
+    <div>
+      <h1 className="text-4xl">Latest photos from Mars 🚀</h1>
       <SortRover />
       <div className="sortByCamera">
         <h3>Sort by Camera</h3>
