@@ -25,11 +25,11 @@ function Photo({ photo, currentlySelected, selectPhoto }: PhotoProps) {
         onClick={() => selectPhoto(photo)}
       />
       {currentlySelected && (
-        <div className="mt-3 text-2xl translate-y-[-4.1rem] transform flex  font-semibold justify-between">
+        <div className="mt-3  text-xs sm:text-base lg:text-2xl  translate-y-[-2.65rem] sm:translate-y-[-3.1rem] lg:translate-y-[-4.1rem] transform flex  font-semibold justify-between">
           <PhotoInfo className="rounded-l-none">
-            <span>From the {photo.rover.name} Rover</span>
+            <span>{photo.rover.name} Rover</span>
             <a
-              className="underline hover:text-red-600 text-base"
+              className="underline hover:text-red-600 text-xs lg:text-base"
               href={photo.img_src}
             >
               Link to Raw Image
@@ -37,7 +37,9 @@ function Photo({ photo, currentlySelected, selectPhoto }: PhotoProps) {
           </PhotoInfo>
           <PhotoInfo className="rounded-r-none right-[0.005rem]">
             <span>Mars Sol: {photo.sol}</span>
-            <span className="text-base">Earth Date: {photo.earth_date}</span>
+            <span className="text-xs lg:text-base">
+              Earth: {photo.earth_date}
+            </span>
           </PhotoInfo>
         </div>
       )}
