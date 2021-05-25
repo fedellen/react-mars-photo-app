@@ -11,9 +11,13 @@ type PhotoProps = {
 
 function Photo({ photo, currentlySelected, selectPhoto }: PhotoProps) {
   return (
-    <div>
+    <div
+      className={`w-full sm:w-1/2 md:w-1/3 p-2   ${
+        currentlySelected ? "sm:w-full md:w-full" : ""
+      }`}
+    >
       <img
-        className="rounded-xl"
+        className="rounded-xl w-full shadow-md"
         src={photo.img_src}
         key={keyGen()}
         alt="Photograph from a Mars rover"
