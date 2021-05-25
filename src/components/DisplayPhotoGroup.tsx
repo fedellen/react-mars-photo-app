@@ -25,7 +25,7 @@ function Photo({ photo, currentlySelected, selectPhoto }: PhotoProps) {
         onClick={() => selectPhoto(photo)}
       />
       {currentlySelected && (
-        <div className="mt-3 text-2xl translate-y-[-4.1rem] transform flex justify-between font-semibold ">
+        <div className="mt-3 text-2xl translate-y-[-4.1rem] transform flex  font-semibold justify-between">
           <PhotoInfo className="rounded-l-none">
             <span>From the {photo.rover.name} Rover</span>
             <a
@@ -35,7 +35,7 @@ function Photo({ photo, currentlySelected, selectPhoto }: PhotoProps) {
               Link to Raw Image
             </a>
           </PhotoInfo>
-          <PhotoInfo className="rounded-r-none">
+          <PhotoInfo className="rounded-r-none right-[0.005rem]">
             <span>Mars Sol: {photo.sol}</span>
             <span className="text-base">Earth Date: {photo.earth_date}</span>
           </PhotoInfo>
@@ -52,7 +52,7 @@ function PhotoInfo({ children, className }: PhotoInfoProps) {
   if (hide) return null;
   return (
     <div
-      className={`flex flex-col bg-bg bg-opacity-80 px-4 rounded-xl rounded-b-none ${className}`}
+      className={`flex flex-col bg-bg bg-opacity-80 px-4 rounded-xl rounded-b-none ${className} items-start absolute`}
       onClick={() => setHide(true)}
     >
       {children}
