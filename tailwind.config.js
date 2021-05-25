@@ -16,10 +16,11 @@ module.exports = {
     },
     extend: {
       colors: {
-        dark: "#1d0b06",
-        bg: "#3a1004",
-        medium: "#581d0b",
-        text: "#db6744",
+        bg: "#471515",
+        dark: "#6e2727",
+        medium: "#b33831",
+        light: "#ea4f36",
+        text: "#f57d4a",
         ppjsLight: "#e6bb8f",
         ppjsOrange: "#f57f26",
         ppjsBlue: "#27A0F2",
