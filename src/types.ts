@@ -60,6 +60,13 @@ export type solObject = {
   photos: marsPhoto[];
 };
 
+/** Type-guard for returned marsObject */
+export function isLatest(
+  marsObject: latestObject | solObject
+): marsObject is latestObject {
+  return (marsObject as latestObject).latest_photos !== undefined;
+}
+
 export type marsPhoto = {
   id: number;
   sol: number;
