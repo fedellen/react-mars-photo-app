@@ -19,8 +19,7 @@ function Photo({ photo, currentlySelected, selectPhoto }: PhotoProps) {
       <img
         className="rounded-xl w-full shadow-md"
         src={photo.img_src}
-        key={keyGen()}
-        alt="Photograph from a Mars rover"
+        alt={`Photograph from a Mars rover ${photo.rover.name}`}
         loading="lazy"
         onClick={() => selectPhoto(photo)}
       />
@@ -31,6 +30,8 @@ function Photo({ photo, currentlySelected, selectPhoto }: PhotoProps) {
             <a
               className="underline hover:text-red-600 text-xs lg:text-base"
               href={photo.img_src}
+              target="_blank"
+              rel="noreferrer"
             >
               Link to Raw Image
             </a>
