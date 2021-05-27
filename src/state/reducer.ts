@@ -27,6 +27,12 @@ export const reducer = (state: State, action: Action): State => {
         selectedPhoto: null,
       };
 
+    case "changeQuery":
+      return {
+        ...state,
+        apiQuery: action.payload,
+      };
+
     default:
       return state;
   }

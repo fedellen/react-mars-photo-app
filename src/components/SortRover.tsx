@@ -1,24 +1,9 @@
 import { useStateValue } from "../state/state";
-import { roverNames } from "../types";
+import { roverNames, rovers } from "../types";
 import { keyGen } from "../utils/keyGen";
 import Button from "./shared/Button";
 
-type RoverButtonProps = {
-  rover: roverNames;
-  setRover: (rover: roverNames) => void;
-};
-
-function RoverButton({ rover, setRover }: RoverButtonProps) {
-  return (
-    <Button
-      onClick={() => setRover}
-      aria-label={`Show latest photos from the Mars ${rover} Rover`}
-    >
-      {rover}
-    </Button>
-  );
-}
-
+/** Change which rover to currently display photo from */
 export default function SortRover() {
   const [{ apiQuery }, dispatch] = useStateValue();
 
@@ -26,21 +11,20 @@ export default function SortRover() {
     if (apiQuery.rover !== rover)
       dispatch({
         type: "changeQuery",
-        payload: { rover: rover, sol: -1 },
+        payload: { rover: rover, sol: -1 }, // -1 sol is `latest_photos`
       });
   }
-
-  const rovers: roverNames[] = [
-    "Curiosity",
-    "Opportunity",
-    "Perseverance",
-    "Spirit",
-  ];
 
   return (
     <div>
       {rovers.map((rover) => (
-        <RoverButton key={keyGen()} rover={rover} setRover={setRover} />
+        <Button
+          key={keyGen()}
+          onClick={() => setRover(rover)}
+          aria-label={`Show latest photos from the Mars ${rover} Rover`}
+        >
+          {rover}
+        </Button>
       ))}
     </div>
   );
