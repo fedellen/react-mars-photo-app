@@ -32,11 +32,17 @@ export type opportunitySpiritCameras =
   | "PANCAM"
   | "MINITES";
 
-export type roverNames =
-  | "Curiosity"
-  | "Perseverance"
-  | "Opportunity"
-  | "Spirit";
+/** All rover names in a readonly array */
+export const rovers = [
+  "Curiosity",
+  "Opportunity",
+  "Perseverance",
+  "Spirit",
+] as const;
+
+/** Union type of rover name array */
+export type roverNames = typeof rovers[number];
+
 type roverStatus = "active" | "complete";
 
 export interface roverManifest extends marsRover {
