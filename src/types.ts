@@ -57,13 +57,19 @@ export interface roverManifest extends marsRover {
   };
 }
 
-/** Types for mars rover  /Perseverance/ endpoint */
+/** Mars rover latest photo endpoint */
 export type latestObject = {
   latest_photos: marsPhoto[];
 };
 
+/** Mars rover specific sol endpoint */
 export type solObject = {
   photos: marsPhoto[];
+};
+
+/** Mars rover manifest endpoint */
+export type manifestObject = {
+  photo_manifest: roverManifest;
 };
 
 /** Type-guard for returned marsObject */
