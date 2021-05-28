@@ -1,27 +1,27 @@
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useStateValue } from "../state/state";
-import {
-  isLatest,
-  latestObject,
-  manifestObject,
-  roverManifest,
-  solObject,
-} from "../types";
+import { isLatest, latestObject, manifestObject, solObject } from "../types";
 import fetchFrom from "../utils/fetchFrom";
 
 // Top secret API key
 const baseMarsApi = "https://mars-photos.herokuapp.com/api/v1/";
-const thirtyMinutes = 1000 * 60 * 30;
 
+/** Sets cache to be stale and dropped after 30 minutes to limit API calls */
+const queryOptions = { staleTime: 1000 * 60 * 30, cacheTime: 1000 * 60 * 30 }; // 30 minutes
+
+/**
+ * Fetches the current marsPhoto[] and roverManifest
+ * from the mars-photo-api and updates the state
+ */
 export default function useMarsQuery() {
   const [{ apiQuery }, dispatch] = useStateValue();
   const { rover, sol } = apiQuery;
   const latestPhotos = sol === -1;
 
-  /** Determines shape then dispatches photo data to state */
+  /** Determines object shape and dispatches photo data to state */
   function setData(data: latestObject | solObject) {
-    // Use type guard to check shape
+    // Use type guard to check shape:
     if (isLatest(data)) {
       dispatch({ type: "setData", payload: data.latest_photos });
     } else {
@@ -36,27 +36,27 @@ export default function useMarsQuery() {
   }
 `;
 
-  // Get current query, from cache if available
+  // Get current query, from cache if available.
+  // Will re-fire when `rover` or `sol` change
   const { error, data } = useQuery<latestObject | solObject>(
     ["marsPhotos", rover, sol],
     () => fetchFrom(currentQuery),
-    // Cache is stale and dropped after 30 minutes
-    { staleTime: thirtyMinutes, cacheTime: thirtyMinutes }
+    queryOptions
   );
   if (error) console.error("Error on photo query", error);
 
-  // When data changes, dispatch the data
+  // When photo data changes, dispatch the new data
   useEffect(() => {
     if (data) setData(data);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  // And do these same steps for the current manifest, but more verbose:
+  // And do these same steps for the current manifest:
   const manifestQuery = `${baseMarsApi}/manifests/${rover}`;
   const { error: manifestError, data: manifestData } = useQuery<manifestObject>(
     ["roverManifest", rover],
     () => fetchFrom(manifestQuery),
-    { staleTime: thirtyMinutes, cacheTime: thirtyMinutes }
+    queryOptions
   );
   if (manifestError) console.error("Error on manifest query", manifestError);
   useEffect(() => {
