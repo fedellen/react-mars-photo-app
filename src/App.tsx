@@ -6,6 +6,7 @@ import { useStateValue } from "./state/state";
 import useMarsQuery from "./hooks/useMarsQuery";
 import SortRover from "./components/SortRover";
 import Footer from "./components/Footer";
+import SortSol from "./components/SortSol";
 
 function App() {
   const [{ apiData }] = useStateValue();
@@ -14,11 +15,6 @@ function App() {
   /** Current camera to display */
   const [currentCamera, setCurrentCamera] =
     useState<perseveranceCameras | "all">("all");
-
-  // /** Current sol, -1 is latest_photos endpoint */
-  // const [sol, setSol] = useState(-1);
-  // /** Current rover to display */
-  // const [rover, setRover] = useState<roverNames>("Perseverance");
 
   function toggleCamera(camera: perseveranceCameras | "all") {
     setCurrentCamera(camera);
@@ -33,6 +29,7 @@ function App() {
     <div>
       <h1 className="text-4xl">Latest photos from Mars 🚀</h1>
       <SortRover />
+      <SortSol />
       <div className="sortByCamera">
         <h3>Sort by Camera</h3>
         <ul>
