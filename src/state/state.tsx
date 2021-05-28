@@ -1,5 +1,5 @@
 import { createContext, Dispatch, useContext, useReducer } from "react";
-import { marsPhoto, roverNames } from "../types";
+import { marsPhoto, roverManifest, roverNames } from "../types";
 import { Action } from "./reducer";
 
 export type apiQuery = { rover: roverNames; sol: number };
@@ -12,6 +12,8 @@ export type State = {
   apiData: marsPhoto[] | null;
   /** User clicked photo  */
   selectedPhoto: marsPhoto | null;
+  /** Current manifest */
+  roverManifest: roverManifest | null;
 };
 
 /** Define your initial state */
@@ -19,6 +21,7 @@ const initialState: State = {
   apiQuery: { rover: "Perseverance", sol: -1 },
   apiData: null,
   selectedPhoto: null,
+  roverManifest: null,
 };
 
 /** Create a context with initial state, and a dispatch function */

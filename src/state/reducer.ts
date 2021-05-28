@@ -1,11 +1,12 @@
-import { marsPhoto } from "../types";
+import { marsPhoto, roverManifest } from "../types";
 import { apiQuery, State } from "./state";
 
 export type Action =
   | { type: "setData"; payload: marsPhoto[] }
   | { type: "selectPhoto"; payload: marsPhoto }
   | { type: "clearPhoto" }
-  | { type: "changeQuery"; payload: apiQuery }; // Todo: Define query types
+  | { type: "changeQuery"; payload: apiQuery } // Todo: Define query types
+  | { type: "setManifest"; payload: roverManifest };
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -31,6 +32,12 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         apiQuery: action.payload,
+      };
+
+    case "setManifest":
+      return {
+        ...state,
+        roverManifest: action.payload,
       };
 
     default:
