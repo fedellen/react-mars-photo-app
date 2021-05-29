@@ -9,10 +9,14 @@ import Footer from "./components/Footer";
 import SortSol from "./components/SortSol";
 
 function App() {
-  const [{ apiData }] = useStateValue();
+  const [{ apiData, roverManifest, apiQuery }] = useStateValue();
+
+  const { rover, sol } = apiQuery;
+
+  // Fetch everything
   useMarsQuery();
 
-  /** Current camera to display */
+  // Current camera to display
   const [currentCamera, setCurrentCamera] =
     useState<perseveranceCameras | "all">("all");
 
@@ -26,8 +30,11 @@ function App() {
       : apiData?.filter((obj) => obj.camera.name === currentCamera);
 
   return (
-    <div>
-      <h1 className="text-4xl">Latest photos from Mars 🚀</h1>
+    <div className="flex flex-col items-center p-2">
+      <h1 className="text-4xl md:text-5xl xl:text-6xl text-center font-extrabold pb-4 lg:pb-8">
+        Latest photos from Mars 🚀
+      </h1>
+      <section></section>
       <SortRover />
       <SortSol />
       <div className="sortByCamera">
@@ -41,6 +48,7 @@ function App() {
           <SortCamera camera="all" setCamera={toggleCamera} />
         </ul>
       </div>
+      <h2>Displaying photos from rover ${} </h2>
       {displayGroup && <DisplayPhotoGroup photoGroup={displayGroup} />}
       <Footer />
     </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useStateValue } from "../state/state";
 import Button from "./shared/Button";
+import SortHeading from "./shared/SortHeading";
 
 export default function SortSol() {
   const [{ apiQuery, roverManifest }, dispatch] = useStateValue();
@@ -42,22 +43,26 @@ export default function SortSol() {
   }
 
   return (
-    <div>
-      <h3>Change sol:</h3>
-      <Button onClick={() => setSol("prev")}>Previous sol</Button>
-      <Button onClick={() => setSol("next")}>Next sol</Button>
-      <input
-        className="bg-dark p-3 rounded-full"
-        placeholder={`Sol between 0 and ${max_sol}`}
-        onChange={(e) => {
-          setInputSol(e.target.value);
-          if (errorMessage) setErrorMessage(null);
-        }}
-      />
+    <div className="flex flex-col">
+      <SortHeading heading="Switch sol:" />
+      <div className="pb-4 space-x-2">
+        <Button onClick={() => setSol("prev")}>Previous sol</Button>
+        <Button onClick={() => setSol("next")}>Next sol</Button>
+      </div>
+      <div className="flex space-x-2">
+        <input
+          className="bg-dark p-2 text-xs rounded-full w-16 shadow-md"
+          placeholder={`0-${max_sol}`}
+          onChange={(e) => {
+            setInputSol(e.target.value);
+            if (errorMessage) setErrorMessage(null);
+          }}
+        />
+        <Button onClick={() => setSol(Math.round(Number(inputSol)))}>
+          Set sol
+        </Button>
+      </div>
       {errorMessage && <span>{errorMessage}</span>}
-      <Button onClick={() => setSol(Math.round(Number(inputSol)))}>
-        Go to sol
-      </Button>
     </div>
   );
 }

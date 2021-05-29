@@ -2,6 +2,7 @@ import { useStateValue } from "../state/state";
 import { roverNames, rovers } from "../types";
 import { keyGen } from "../utils/keyGen";
 import Button from "./shared/Button";
+import SortHeading from "./shared/SortHeading";
 
 /** Change which rover to currently display photo from */
 export default function SortRover() {
@@ -17,8 +18,8 @@ export default function SortRover() {
   }
 
   return (
-    <div>
-      <h3>Switch Rover:</h3>
+    <div className="space-x-2 mb-4">
+      <SortHeading heading="Switch to rover:" />
       {rovers
         .filter((r) => r !== currentRover)
         .map((rover) => (
