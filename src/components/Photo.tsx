@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { marsPhoto } from "../types";
 import PhotoInfo from "./PhotoInfo";
 
@@ -7,7 +8,7 @@ type PhotoProps = {
   selectPhoto: (photo: marsPhoto) => void;
 };
 
-export default function Photo({
+const Photo = memo(function Photo({
   photo,
   currentlySelected,
   selectPhoto,
@@ -48,4 +49,5 @@ export default function Photo({
       )}
     </div>
   );
-}
+});
+export default Photo;
