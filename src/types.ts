@@ -32,6 +32,11 @@ export type opportunitySpiritCameras =
   | "PANCAM"
   | "MINITES";
 
+export type roverCameras =
+  | perseveranceCameras
+  | opportunitySpiritCameras
+  | curiosityCameras;
+
 /** All rover names in a readonly array */
 export const rovers = [
   "Curiosity",

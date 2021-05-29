@@ -1,4 +1,4 @@
-import { marsPhoto, roverManifest } from "../types";
+import { marsPhoto, roverCameras, roverManifest } from "../types";
 import { apiQuery, State } from "./state";
 
 export type Action =
@@ -6,6 +6,7 @@ export type Action =
   | { type: "selectPhoto"; payload: marsPhoto }
   | { type: "clearPhoto" }
   | { type: "changeQuery"; payload: apiQuery } // Todo: Define query types
+  | { type: "setCamera"; payload: roverCameras | "all" }
   | { type: "setManifest"; payload: roverManifest };
 
 export const reducer = (state: State, action: Action): State => {
@@ -38,6 +39,12 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         roverManifest: action.payload,
+      };
+
+    case "setCamera":
+      return {
+        ...state,
+        currentCamera: action.payload,
       };
 
     default:
