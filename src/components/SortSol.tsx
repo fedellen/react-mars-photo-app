@@ -43,7 +43,7 @@ export default function SortSol() {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col mb-4">
       <SortHeading heading="Switch sol:" />
       <div className="pb-4 space-x-2">
         <Button onClick={() => setSol("prev")}>Previous sol</Button>

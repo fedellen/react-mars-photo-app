@@ -1,20 +1,36 @@
-import { perseveranceCameras } from "../types";
+import { useStateValue } from "../state/state";
 import Button from "./shared/Button";
+import SortHeading from "./shared/SortHeading";
 
-type SortCameraProps = {
-  camera: perseveranceCameras | "all";
-  setCamera: (camera: perseveranceCameras | "all") => void;
-};
+export default function SortCamera() {
+  const [{ roverManifest, apiQuery }, dispatch] = useStateValue();
 
-export default function SortCamera({ camera, setCamera }: SortCameraProps) {
+  // Manifest must be fetched to filter by camera
+  if (!roverManifest) return null;
+
+  const { photos, max_sol } = roverManifest;
+  const { sol } = apiQuery;
+  const filterBySol = sol === -1 ? max_sol : sol;
+
+  const availableCameras = photos.find((p) => p.sol === filterBySol)?.cameras;
+
+  // No available cameras, no filter by camera
+  if (!availableCameras) return null;
+
   return (
-    <li>
-      <Button
-        onClick={() => setCamera(camera)}
-        aria-label={`Show latest photos from ${camera}`}
-      >
-        {camera}
-      </Button>
-    </li>
+    <div>
+      <SortHeading heading="Filter by camera:" />
+      <div className="flex flex-wrap ">
+        {availableCameras.map((camera) => (
+          <Button
+            onClick={() => dispatch({ type: "setCamera", payload: camera })}
+            aria-label={`Show latest photos from ${camera}`}
+            className="m-1"
+          >
+            {camera}
+          </Button>
+        ))}
+      </div>
+    </div>
   );
 }

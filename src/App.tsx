@@ -9,20 +9,20 @@ import Footer from "./components/Footer";
 import SortSol from "./components/SortSol";
 
 function App() {
-  const [{ apiData, roverManifest, apiQuery }] = useStateValue();
+  const [{ apiData, roverManifest, apiQuery, currentCamera }] = useStateValue();
 
   const { rover, sol } = apiQuery;
 
   // Fetch everything
   useMarsQuery();
 
-  // Current camera to display
-  const [currentCamera, setCurrentCamera] =
-    useState<perseveranceCameras | "all">("all");
+  // // Current camera to display
+  // const [currentCamera, setCurrentCamera] =
+  //   useState<perseveranceCameras | "all">("all");
 
-  function toggleCamera(camera: perseveranceCameras | "all") {
-    setCurrentCamera(camera);
-  }
+  // function toggleCamera(camera: perseveranceCameras | "all") {
+  //   setCurrentCamera(camera);
+  // }
 
   const displayGroup =
     currentCamera === "all"
@@ -34,21 +34,16 @@ function App() {
       <h1 className="text-4xl md:text-5xl xl:text-6xl text-center font-extrabold pb-4 lg:pb-8">
         Latest photos from Mars 🚀
       </h1>
-      <section></section>
-      <SortRover />
-      <SortSol />
-      <div className="sortByCamera">
-        <h3>Sort by Camera</h3>
-        <ul>
-          <SortCamera camera="MCZ_LEFT" setCamera={toggleCamera} />
-          <SortCamera camera="MCZ_RIGHT" setCamera={toggleCamera} />
-          <SortCamera camera="NAVCAM_LEFT" setCamera={toggleCamera} />
-          <SortCamera camera="NAVCAM_RIGHT" setCamera={toggleCamera} />
-          <SortCamera camera="SUPERCAM_RMI" setCamera={toggleCamera} />
-          <SortCamera camera="all" setCamera={toggleCamera} />
-        </ul>
-      </div>
-      <h2>Displaying photos from rover ${} </h2>
+      <section className="p-4">
+        <SortRover />
+        <SortSol />
+        <SortCamera />
+      </section>
+      <h2 className="text-2xl md:text-3xl xl:text-4xl py-6 font-extrabold text-center">
+        Displaying photos from rover {rover}, Mars sol{" "}
+        {sol === -1 ? roverManifest?.max_sol : sol}
+        {currentCamera === "all" ? "" : `, camera "${currentCamera}"`}:
+      </h2>
       {displayGroup && <DisplayPhotoGroup photoGroup={displayGroup} />}
       <Footer />
     </div>
