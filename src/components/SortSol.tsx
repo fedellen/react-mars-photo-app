@@ -1,15 +1,20 @@
+import { useState } from "react";
 import { useStateValue } from "../state/state";
 import Button from "./shared/Button";
 
 export default function SortSol() {
   const [{ apiQuery, roverManifest }, dispatch] = useStateValue();
-  const { sol } = apiQuery;
+  const [inputSol, setInputSol] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   // User cannot change sol if manifest fails to fetch
   if (!roverManifest) return null;
-  const { max_sol } = roverManifest;
 
-  function setSol(direction: "prev" | "next") {
+  const { max_sol } = roverManifest;
+  const solErrorMessage = `Must be a number between 0-${max_sol}`;
+  const { sol } = apiQuery;
+
+  function setSol(direction: "prev" | "next" | number) {
     let newSol: number;
 
     if (direction === "prev") {
@@ -18,11 +23,18 @@ export default function SortSol() {
       } else {
         newSol = sol - 1;
       }
-    } else {
+    } else if (direction === "next") {
       if (sol === max_sol - 1) {
         newSol = -1;
       } else {
         newSol = sol + 1;
+      }
+    } else {
+      if (isNaN(direction) || direction < -1 || direction > max_sol) {
+        setErrorMessage(solErrorMessage);
+        return;
+      } else {
+        newSol = direction;
       }
     }
 
@@ -31,12 +43,21 @@ export default function SortSol() {
 
   return (
     <div>
-      <h3>
-        Displaying photos from{" "}
-        {apiQuery.sol === -1 ? "latest sol" : `sol ${apiQuery.sol}`}
-      </h3>
-      <Button onClick={() => setSol("prev")}>Previous Sol</Button>
-      <Button onClick={() => setSol("next")}>Next Sol</Button>
+      <h3>Change sol:</h3>
+      <Button onClick={() => setSol("prev")}>Previous sol</Button>
+      <Button onClick={() => setSol("next")}>Next sol</Button>
+      <input
+        className="bg-dark p-3 rounded-full"
+        placeholder={`Sol between 0 and ${max_sol}`}
+        onChange={(e) => {
+          setInputSol(e.target.value);
+          if (errorMessage) setErrorMessage(null);
+        }}
+      />
+      {errorMessage && <span>{errorMessage}</span>}
+      <Button onClick={() => setSol(Math.round(Number(inputSol)))}>
+        Go to sol
+      </Button>
     </div>
   );
 }
