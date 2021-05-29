@@ -20,7 +20,7 @@ export default function Button({
 }: ButtonProps) {
   return (
     <button
-      className={`p-2 lg:px-4 text-xs lg:text-base  rounded-full shadow-md bg-medium text-bg font-bold hover:bg-light ${className}`}
+      className={`p-2 lg:px-4 text-xs lg:text-small  rounded-full shadow-md bg-medium text-bg font-bold hover:bg-light ${className}`}
       onClick={onClick}
       {...props}
     >
