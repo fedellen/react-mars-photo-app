@@ -32,6 +32,7 @@ export const reducer = (state: State, action: Action): State => {
     case "changeQuery":
       return {
         ...state,
+        currentCamera: "all",
         apiQuery: action.payload,
       };
 
