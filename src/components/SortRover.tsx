@@ -18,7 +18,7 @@ export default function SortRover() {
   }
 
   return (
-    <div className="space-x-2 mb-4">
+    <div className="space-x-2 mb-4 mr-6">
       <SortHeading heading="Switch to rover:" />
       {rovers
         .filter((r) => r !== currentRover)

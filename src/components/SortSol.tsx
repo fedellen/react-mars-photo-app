@@ -43,26 +43,31 @@ export default function SortSol() {
   }
 
   return (
-    <div className="flex flex-col mb-4">
-      <SortHeading heading="Switch sol:" />
-      <div className="pb-4 space-x-2">
-        <Button onClick={() => setSol("prev")}>Previous sol</Button>
-        <Button onClick={() => setSol("next")}>Next sol</Button>
+    <div className="flex flex-wrap mb-4">
+      <div className="mr-4">
+        <SortHeading heading="Switch sol:" />
+        <div className=" space-x-2">
+          <Button onClick={() => setSol("prev")}>Previous</Button>
+          <Button onClick={() => setSol("next")}>Next</Button>
+        </div>
       </div>
-      <div className="flex space-x-2">
-        <input
-          className="bg-dark p-2 text-xs rounded-full w-16 shadow-md"
-          placeholder={`0-${max_sol}`}
-          onChange={(e) => {
-            setInputSol(e.target.value);
-            if (errorMessage) setErrorMessage(null);
-          }}
-        />
-        <Button onClick={() => setSol(Math.round(Number(inputSol)))}>
-          Set sol
-        </Button>
+      <div>
+        <SortHeading heading="Specific sol:" />
+        <div className="flex space-x-2">
+          <input
+            className="bg-bg placeholder-medium p-2 text-xs lg:text-sm rounded-full w-16 shadow-md"
+            placeholder={`0-${max_sol}`}
+            onChange={(e) => {
+              setInputSol(e.target.value);
+              if (errorMessage) setErrorMessage(null);
+            }}
+          />
+          <Button onClick={() => setSol(Math.round(Number(inputSol)))}>
+            Set
+          </Button>
+        </div>
+        {errorMessage && <span>{errorMessage}</span>}
       </div>
-      {errorMessage && <span>{errorMessage}</span>}
     </div>
   );
 }

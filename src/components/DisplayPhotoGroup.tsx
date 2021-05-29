@@ -73,7 +73,7 @@ export default function DisplayPhotoGroup({
   const [{ selectedPhoto }, dispatch] = useStateValue();
 
   return (
-    <section className="flex flex-wrap">
+    <section className="flex flex-wrap w-full">
       {" "}
       {photoGroup.map((photo) => (
         <Photo
