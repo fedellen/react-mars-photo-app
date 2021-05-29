@@ -6,26 +6,30 @@ import Button from "./shared/Button";
 /** Change which rover to currently display photo from */
 export default function SortRover() {
   const [{ apiQuery }, dispatch] = useStateValue();
+  const { rover: currentRover } = apiQuery;
 
   function setRover(rover: roverNames) {
-    if (apiQuery.rover !== rover)
+    if (currentRover !== rover)
       dispatch({
         type: "changeQuery",
-        payload: { rover: rover, sol: -1 }, // -1 sol is `latest_photos`
+        payload: { rover, sol: -1 }, // -1 sol is `latest_photos`
       });
   }
 
   return (
     <div>
-      {rovers.map((rover) => (
-        <Button
-          key={keyGen()}
-          onClick={() => setRover(rover)}
-          aria-label={`Show latest photos from the Mars ${rover} Rover`}
-        >
-          {rover}
-        </Button>
-      ))}
+      <h3>Switch Rover:</h3>
+      {rovers
+        .filter((r) => r !== currentRover)
+        .map((rover) => (
+          <Button
+            key={keyGen()}
+            onClick={() => setRover(rover)}
+            aria-label={`Show latest photos from the Mars ${rover} Rover`}
+          >
+            {rover}
+          </Button>
+        ))}
     </div>
   );
 }

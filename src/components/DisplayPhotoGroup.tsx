@@ -19,7 +19,7 @@ function Photo({ photo, currentlySelected, selectPhoto }: PhotoProps) {
       <img
         className="rounded-xl w-full shadow-md"
         src={photo.img_src}
-        alt={`Photograph from a Mars rover ${photo.rover.name}`}
+        alt={`Photograph from Mars rover ${photo.rover.name}`}
         loading="lazy"
         onClick={() => selectPhoto(photo)}
       />
