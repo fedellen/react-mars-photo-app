@@ -14,15 +14,15 @@ export default function SortCamera() {
   const filterBySol = sol === -1 ? max_sol : sol;
 
   const availableCameras = photos.find((p) => p.sol === filterBySol)?.cameras;
-
-  // No available cameras, no filter by camera
   if (!availableCameras) return null;
+
+  const displayCameras = [...availableCameras, "all"] as const;
 
   return (
     <div>
       <SortHeading heading="Filter by camera:" />
       <div className="flex flex-wrap ">
-        {availableCameras.map((camera) => (
+        {displayCameras.map((camera) => (
           <Button
             onClick={() => dispatch({ type: "setCamera", payload: camera })}
             aria-label={`Show latest photos from ${camera}`}
