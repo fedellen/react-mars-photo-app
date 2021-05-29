@@ -54,12 +54,14 @@ export interface roverManifest extends marsRover {
   max_sol: number;
   max_date: string;
   total_photos: number;
-  photos: {
-    sol: number;
-    earth_date: string;
-    total_photos: 3702;
-    cameras: perseveranceCameras | curiosityCameras | opportunitySpiritCameras;
-  };
+  photos: [
+    {
+      sol: number;
+      earth_date: string;
+      total_photos: 3702;
+      cameras: roverCameras[];
+    }
+  ];
 }
 
 /** Mars rover latest photo endpoint */
