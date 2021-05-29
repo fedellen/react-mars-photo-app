@@ -1,4 +1,5 @@
 import { useStateValue } from "../state/state";
+import { keyGen } from "../utils/keyGen";
 import Button from "./shared/Button";
 import SortHeading from "./shared/SortHeading";
 
@@ -26,6 +27,7 @@ export default function SortCamera() {
             onClick={() => dispatch({ type: "setCamera", payload: camera })}
             aria-label={`Show latest photos from ${camera}`}
             className="m-1"
+            key={keyGen()}
           >
             {camera}
           </Button>
