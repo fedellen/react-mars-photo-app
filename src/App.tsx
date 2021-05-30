@@ -1,12 +1,11 @@
-import { useState } from "react";
 import SortCamera from "./components/SortCamera";
-import { perseveranceCameras } from "./types";
 import DisplayPhotoGroup from "./components/DisplayPhotoGroup";
 import { useStateValue } from "./state/state";
 import useMarsQuery from "./hooks/useMarsQuery";
 import SortRover from "./components/SortRover";
 import Footer from "./components/Footer";
 import SortSol from "./components/SortSol";
+import SubHeading from "./components/shared/SubHeading";
 
 function App() {
   const [{ apiData, roverManifest, apiQuery, currentCamera }] = useStateValue();
@@ -36,12 +35,19 @@ function App() {
         </div>
         <SortCamera />
       </section>
-      <h2 className="text-2xl md:text-3xl xl:text-4xl py-6 font-extrabold text-center">
-        Displaying photos from rover {rover}, Mars sol{" "}
-        {sol === -1 ? roverManifest?.max_sol : sol}
-        {currentCamera === "all" ? "" : `, camera "${currentCamera}"`}:
-      </h2>
-      {displayGroup && <DisplayPhotoGroup photoGroup={displayGroup} />}
+
+      {displayGroup && displayGroup.length > 0 ? (
+        <>
+          <SubHeading>
+            Displaying photos from rover {rover}, Mars sol{" "}
+            {sol === -1 ? roverManifest?.max_sol : sol}
+            {currentCamera === "all" ? "" : `, camera "${currentCamera}"`}:
+          </SubHeading>
+          <DisplayPhotoGroup photoGroup={displayGroup} />
+        </>
+      ) : (
+        <SubHeading>Could not find any photos for that sol...</SubHeading>
+      )}
       <Footer />
     </div>
   );
