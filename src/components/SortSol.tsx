@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useKeyHandler } from "../hooks/useKeyHandler";
 import { useStateValue } from "../state/state";
 import Button from "./shared/Button";
 import SortHeading from "./shared/SortHeading";
@@ -7,6 +8,14 @@ export default function SortSol() {
   const [{ apiQuery, roverManifest }, dispatch] = useStateValue();
   const [inputSol, setInputSol] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useKeyHandler([
+    {
+      keyValues: ["Enter"],
+      callback: () => setSol(Math.round(Number(inputSol))),
+      keyCooldown: 500,
+    },
+  ]);
 
   // User cannot change sol if manifest fails to fetch
   if (!roverManifest) return null;
@@ -39,6 +48,7 @@ export default function SortSol() {
       }
     }
 
+    setInputSol("");
     dispatch({ type: "changeQuery", payload: { ...apiQuery, sol: newSol } });
   }
 
@@ -57,6 +67,7 @@ export default function SortSol() {
           <input
             className="bg-bg placeholder-medium p-2 text-xs lg:text-sm rounded-full w-16 shadow-md"
             placeholder={`0-${max_sol}`}
+            value={inputSol}
             onChange={(e) => {
               setInputSol(e.target.value);
               if (errorMessage) setErrorMessage(null);

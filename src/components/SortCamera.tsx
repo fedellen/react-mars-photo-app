@@ -19,7 +19,7 @@ export default function SortCamera() {
   const displayCameras = [...availableCameras, "all"] as const;
 
   return (
-    <div>
+    <div className="max-w-3xl">
       <SortHeading heading="Filter by camera:" />
       <div className="flex flex-wrap ">
         {displayCameras.map((camera) => (
