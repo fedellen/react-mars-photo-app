@@ -6,6 +6,7 @@ import SortRover from "./components/SortRover";
 import Footer from "./components/Footer";
 import SortSol from "./components/SortSol";
 import SubHeading from "./components/shared/SubHeading";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const [{ apiData, roverManifest, apiQuery, currentCamera }] = useStateValue();
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <div className="flex flex-col items-center p-2 sm:p-4 md:pt-8 lg:pt-12">
+      <ScrollToTop />
       <h1 className="text-4xl md:text-5xl xl:text-6xl text-center font-extrabold pb-4 lg:pb-8">
         Latest photos from Mars 🚀
       </h1>
