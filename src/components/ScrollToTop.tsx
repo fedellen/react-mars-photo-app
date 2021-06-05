@@ -3,7 +3,7 @@ import UpArrow from "./svg/UpArrow";
 export default function ScrollToTop() {
   return (
     <button
-      className="p-4 bg-dark fixed right-5 bottom-5 md:right-8 md:bottom-8 rounded-full shadow-md"
+      className="p-4 bg-dark fixed right-5 bottom-5 md:right-8 md:bottom-8 rounded-full shadow-md z-10"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
     >
       <UpArrow />
