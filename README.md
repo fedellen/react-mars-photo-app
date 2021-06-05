@@ -1,12 +1,20 @@
 # Mars Perseverance Rover Photos
 
-This is a quick practice project I'm working on to sharpen my React workflow. Currently, the application simply renders out the latest photos from the Mars Perseverance rover. The user can then sort the photos by camera name. I will be expanding the app to display photos from each rover, and be able to go through each sol/camera.
+This is a quick practice project I've been working on to sharpen my React workflow. By default, the application will render out the latest photos from the Mars Perseverance rover.
 
-The project is now using TypeScript, React, TailwindCSS, React Query, and (soon) React Router.
+Users can use the menu to search through the entire photo history of each Mars rovers: Spirit, Opportunity, Curiosity, and Perseverance. Photos are sorted and searched by sol, which is how many Mars days passed since the rover landed on Mars. The user can then sort the photos by the camera names.
+
+The app remains unfinished, but is live on [Netlify](https://react-mars-photo-app.netlify.app/).
+
+## Tools
+
+- [React](https://github.com/facebook/react)
+- [TypeScript](https://github.com/microsoft/TypeScript)
+- [TailwindCSS](https://github.com/tailwindlabs/tailwindcss)
+- [React Query](https://github.com/tannerlinsley/react-query)
+- [Mars Photo API](https://github.com/chrisccerami/mars-photo-api)
 
 ---
-
-
 
 ## Available Scripts
 
@@ -22,15 +30,10 @@ You will also see any lint errors in the console.
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode.
 
 ### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the app for production to the `build` folder.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Committing to the master branch will trigger a Netlify deployment.
